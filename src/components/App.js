@@ -1,82 +1,42 @@
-import React from "react";
-function App() {
-  return (
-    <>
-        <div className="header">
-          <span>
-            <h4 style={{ display: "inline" }}>Student Details</h4>
-          </span>
+import React, { Component } from "react";
+import axios from "axios";
+import Header from "./Header";
+import LeftList from "./leftList";
+import RightMain from "./RightMain";
+import Footer from "./Footer";
 
-          <span style={{ float: "right", fontStyle: "italic" }}>
-            Version: v1
-          </span>
-          <span
-            style={{
-              float: "right",
-              marginRight: "20px",
-              cursor: "pointer",
-              color: "#27277e",
-            }}
-          >
-            Add Student
-          </span>
-          <span
-            style={{
-              float: "right",
-              marginRight: "20px",
-              cursor: "pointer",
-              color: "#27277e",
-            }}
-          >
-            View Student
-          </span>
-        </div>
+export class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount() {
+    axios
+      .get(`http://localhost:8081/api-v1/students/getAllStudent`)
+      .then((res) => {
+        if (res.status === 200) {
+          const persons = res.data;
+          this.setState({ persons });
+          console.log(persons);
+        } else {
+          this.setState({});
+        }
+      });
+  }
+
+  render() {
+    return (
+      <>
+        <Header />
         <div className="body">
-          <div className="leftlist">
-            <div>
-              <ul>
-                <li>The Flight</li>
-                <li>The City</li>
-                <li>The Island</li>
-                <li>The Food</li>
-                <li>The Flight</li>
-                <li>The City</li>
-                <li>The Island</li>
-                <li>The Food</li>
-                <li>The Flight</li>
-                <li>The City</li>
-                <li>The Island</li>
-                <li>The Food</li>
-                <li>The Flight</li>
-                <li>The City</li>
-                <li>The Island</li>
-                <li>The Food</li>
-                <li>The Flight</li>
-                <li>The City</li>
-                <li>The Island</li>
-                <li>The Food</li>
-                <li>The Flight</li>
-                <li>The City</li>
-                <li>The Island</li>
-                <li>The Food</li>
-              </ul>
-            </div>
-          </div>
-          <div className="rightmain">
-            <div class="card">
-              <img src="logo192.png" alt="BigCo Inc. logo" />
-              <div class="container">
-                <h4>
-                  <b>John Doe</b>
-                </h4>
-                <p>Architect & Engineer</p>
-              </div>
-            </div>
-          </div>
+          <LeftList />
+          <RightMain />
         </div>
-        <div className="footer"></div>
-    </>
-  );
+        <Footer />
+      </>
+    );
+  }
 }
 
 export default App;
