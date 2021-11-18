@@ -1,35 +1,27 @@
 import React from "react";
 
-function leftList() {
+function leftList(props) {
+  let students = props.students;
+  const selectOne = props.selectOne;
+
+  const allData = () => {
+    return students.map((student) => (
+      <li
+        onClick={() => {
+          selectOne(student);
+        }}
+        key={student.id}
+      >
+        {student.firstName}
+      </li>
+    ));
+  };
+
   return (
     <div className="leftlist">
       <div>
-        <ul>
-          <li>The Flight</li>
-          <li>The City</li>
-          <li>The Island</li>
-          <li>The Food</li>
-          <li>The Flight</li>
-          <li>The City</li>
-          <li>The Island</li>
-          <li>The Food</li>
-          <li>The Flight</li>
-          <li>The City</li>
-          <li>The Island</li>
-          <li>The Food</li>
-          <li>The Flight</li>
-          <li>The City</li>
-          <li>The Island</li>
-          <li>The Food</li>
-          <li>The Flight</li>
-          <li>The City</li>
-          <li>The Island</li>
-          <li>The Food</li>
-          <li>The Flight</li>
-          <li>The City</li>
-          <li>The Island</li>
-          <li>The Food</li>
-        </ul>
+        <ul>{students != null ? allData() : "No data"}</ul>
+        {/* <ul>{students != null ? allData() : "No data"}</ul> */}
       </div>
     </div>
   );
