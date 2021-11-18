@@ -6,12 +6,7 @@ function leftList(props) {
 
   const allData = () => {
     return students.map((student) => (
-      <li
-        onClick={() => {
-          selectOne(student);
-        }}
-        key={student.id}
-      >
+      <li onClick={() => selectOne(student)} key={student.id}>
         {student.firstName}
       </li>
     ));

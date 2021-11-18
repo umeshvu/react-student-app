@@ -24,8 +24,9 @@ export class App extends Component {
     if (this.state.students.length === 0) {
       this.getData()
         .then((data) => {
-          this.setState({ students: data });
-          this.setState({ selectedStudent: data[0] });
+          this.setState({ students: data }, () => {
+            this.setState({ selectedStudent: data[0] });
+          });
         })
         .catch((err) => {
           console.log(err);
